@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
+    <meta name="Author" content="Spruko Technologies Private Limited">
+    <meta name="Keywords"
+          content="bootstrap admin template, admin template ,admin panel template ,bootstrap 4 admin template ,bootstrap admin ,admin dashboard template ,bootstrap admin panel ,bitcoin dashboard ,crypto dashboard ,btc dashboard ,cryptocurrency dashboard ,bitcoin template ,cryptocurrency template ,crypto template ,cryptocurrency dashboard template ,cryptocurrency admin template ,crypto admin template ,btconline dashboard ,ryptocurrency dashboard template ,crypto admin template ,crypto trading dashboard ,cryptocurrency admin template "/>
+
+    <title>心理健康平台</title>
+    <link rel="stylesheet" href="/front/css/style.css">
+</head>
+<body>
+<div id="loading">
+    <div id="loading-center"></div>
+</div>
+<div class="wrapper">
+
+    <!--左侧导航栏-->
+    <div th:include="template :: main-sidebar-doctor"></div>
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+
+        <div th:include="template :: main-header-doctor"></div>
+
+        <div class="container-fluid">
+            <div class="iq-card">
+                <div class="iq-card-header d-flex justify-content-between">
+                    <div class="iq-header-title">
+                        <h4 class="card-title" th:text="${message}"></h4>
+                    </div>
+                </div>
+                <div class="iq-card-body">
+                    <div class="selbox d-flex" style="">
+                        <div class="form1">
+                            <ul class="row">
+                                <li class="col-xs-4"><span>信息：</span>
+                                    <input type="text" class="form-control" name="searchName" id="searchName"
+                                           th:value="${searchName}">
+                                </li>
+                                <li class="col-xs-4" style="padding-left: 10px">
+                                    <button class="btn btn-primary" th:onclick="searchByName([[${detailUser.username}]])">查询</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tablebox">
+                        <table class="table">
+                            <thead>
+                            <tr style="padding: 5px">
+                                <th style="text-align:center">序号</th>
+                                <th style="text-align:center">接受信息</th>
+                                <th style="text-align:center">发送信息</th>
+                                <th style="text-align:center">发送时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="element,stat:${list}">
+                                <td style="text-align:center" th:text="${stat.count}"></td>
+                                <td style="text-align:center" th:if="${element.senderUsername==detailUser.username}">[[${element.message}]]</td>
+                                <td style="text-align:center" th:unless="${element.senderUsername==detailUser.username}"></td>
+                                <td style="text-align:center" th:if="${element.receiverUsername==detailUser.username}">[[${element.message}]]</td>
+                                <td style="text-align:center" th:unless="${element.receiverUsername==detailUser.username}"></td>
+                                <td style="text-align:center" th:text="${#dates.format(element.sendTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white iq-footer">
+                <div class="container-fluid" >
+                    <div style="text-align:center">
+                        <button class="btn btn-default" type="button" th:onclick="goBack()">返回</button>
+                        <button class="btn btn-danger" th:onclick="scale()">推荐量表</button>
+                        <button class="btn btn-primary" type="button" th:onclick="submit()">留言</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal"
+                 class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">留言</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form">
+                                <input type="hidden" id="username" name="username" th:value="${detailUser.username}">
+                                <div class="d-flex">
+                                    <label style="width: 120px">用户姓名：</label>
+                                    <span th:text="${detailUser.name}" class="form-control placeholder-no-fix"></span>
+                                </div>
+                                <br>
+                                <div class="d-flex">
+                                    <label style="width: 120px">消息：</label>
+                                    <textarea id="sendMsg" name="sendMsg" placeholder="想对用户说些什么。。。" required="required"
+                                              class="form-control placeholder-no-fix"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                            <button class="btn btn-primary" type="button" th:onclick="SubmitUserAccount([[${detailUser.username}]])">发送</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal -->
+
+            <!-- Modal -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal2"
+                 class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">留言</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form2">
+                                <input type="hidden" id="username2" name="username" th:value="${detailUser.username}">
+                                <div class="d-flex">
+                                    <label style="width: 120px">用户姓名：</label>
+                                    <span th:text="${detailUser.name}" class="form-control placeholder-no-fix"></span>
+                                </div>
+                                <br>
+                                <div class="d-flex">
+                                    <label style="width: 120px">量表：</label>
+                                    <select class="form-control placeholder-no-fix" id="sendMsg2" name="sendMsg">
+                                        <option value="">请选择量表</option>
+                                        <span th:each="element:${scaleList}">
+                                            <option th:value="${element.getName()}" th:text="${element.getName()}"></option>
+                                        </span>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                            <button class="btn btn-primary" type="button" th:onclick="scaleName([[${detailUser.username}]])">发送</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal -->
+
+            <div th:include="template :: footer-doctor"></div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    function scale() {
+        $('#myModal2').modal('show')
+    }
+
+    function scaleName(username) {
+        var formData = $("#form2").serialize()
+        if ($("#sendMsg2").val() <= 0) {
+            alert("发送消息不能为空")
+            return
+        }
+        $.ajax({
+            type: "POST",
+            url: "/doctor/sendMsg",
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == 200) {
+                    $('#myModal2').modal('hide')
+                    alert(data.message)
+                    location.href = "/doctor/dealAppoint?username="+username
+                } else {
+                    alert(data.message)
+                }
+            }
+        });
+    }
+
+    function goBack() {
+        location.href = "/doctor/queryUser"
+    }
+
+    function searchByName(username) {
+        location.href = "/doctor/dealAppoint?searchName=" + $("#searchName").val()+"&username="+username
+    }
+
+    function submit(name, username) {
+        $('#myModal').modal('show')
+        $("#sendMsg").val('');
+    }
+
+    function SubmitUserAccount(username) {
+        var formData = $("#form").serialize()
+        if ($("#sendMsg").val() <= 0) {
+            alert("发送消息不能为空")
+            return
+        }
+        $.ajax({
+            type: "POST",
+            url: "/doctor/sendMsg",
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == 200) {
+                    $('#myModal').modal('hide')
+                    alert(data.message)
+                    location.href = "/doctor/dealAppoint?username="+username
+                } else {
+                    alert(data.message)
+                }
+            }
+        });
+    }
+</script>
+
+<script src="/front/js/jquery.min.js" type="text/javascript"></script>
+<script src="/front/js/jquery.min.js"></script>
+<script src="/front/js/bootstrap.min.js"></script>
+<script src="/front/js/smooth-scrollbar.js"></script>
+<script src="/front/js/custom.js"></script>
+<script src="/front/laydate/laydate.js"></script>
+<script>
+    lay('#version').html('-v' + laydate.v);
+    laydate.render({
+        elem: '#date'
+        , range: true
+        , theme: '#2c9eae'
+    });
+</script>
+</body>
+</html>

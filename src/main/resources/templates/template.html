@@ -1,0 +1,318 @@
+<!--管理端-->
+<!--左侧导航栏-->
+<div th:fragment="main-sidebar-admin">
+    <div class="iq-sidebar">
+        <div class="iq-sidebar-logo d-flex justify-content-between">
+            <a href="/admin/index">
+                <span>心理健康平台</span>
+            </a>
+        </div>
+        <div id="sidebar-scrollbar">
+            <nav class="iq-sidebar-menu">
+                <ul class="iq-menu">
+                    <li>
+                        <a href="/admin/index" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</span></a>
+                    </li>
+                    <li>
+                        <a href="/admin/queryAccount?role=user" class="iq-waves-effect"><i
+                                class="ri-bar-chart-2-fill"></i><span>用户账号</span></a>
+                    </li>
+                    <li>
+                        <a href="/admin/queryAccount?role=doctor" class="iq-waves-effect"><i
+                                class="ri-bar-chart-2-fill"></i><span>医生账号</span></a>
+                    </li>
+                    <li>
+                        <a href="/admin/queryAccount?role=admin" class="iq-waves-effect"><i
+                                class="ri-bar-chart-2-fill"></i><span>管理员账号</span></a>
+                    </li>
+                    <li>
+                        <a href="/admin/queryScale" class="iq-waves-effect"><i
+                                class="ri-order-play-fill"></i><span>量表管理</span></a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="p-3"></div>
+        </div>
+    </div>
+</div>
+<!--管理端-->
+<!--右侧顶部标题栏-->
+<div th:fragment="main-header-admin">
+    <div class="iq-top-navbar">
+        <div class="iq-navbar-custom">
+
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <div class="iq-search-bar">
+                    <h3>管理端</h3>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                </div>
+                <ul class="navbar-list">
+                    <li>
+                        <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
+                            <div class="caption">
+                                <h6 class="mb-0 line-height"><span sec:authentication="principal.username"></span></h6>
+                                <span class="font-size-12">管理员</span>
+                            </div>
+                        </a>
+                        <div class="iq-sub-dropdown iq-user-dropdown">
+                            <div class="iq-card shadow-none m-0">
+                                <div class="iq-card-body p-0 ">
+                                    <div class="bg-primary p-3">
+                                        <h5 class="mb-0 text-white line-height">你好-<span sec:authentication="principal.username"></span></h5>
+                                    </div>
+                                    <a href="/admin/account" class="iq-sub-card iq-bg-primary-hover">
+                                        <div class="media align-items-center">
+                                            <div class="rounded iq-card-icon iq-bg-primary">
+                                                <i class="ri-file-user-line"></i>
+                                            </div>
+                                            <div class="media-body ml-3">
+                                                <h6 class="mb-0 ">修改账号</h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="d-inline-block w-100 text-center p-3">
+                                        <a class="bg-primary iq-sign-btn" href="/logout" role="button">退出登录<i
+                                                class="ri-login-box-line ml-2"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+</div>
+<!--管理端-->
+<!--右侧顶部标题栏-->
+<div th:fragment="footer-admin">
+    <footer class="bg-white iq-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#"></a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 text-right">
+                    2022 @<a href="#">心理健康平台</a> 版权所有
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<!--用户端-->
+<!--左侧导航栏-->
+<div th:fragment="main-sidebar-user">
+    <div class="iq-sidebar">
+        <div class="iq-sidebar-logo d-flex justify-content-between">
+            <a href="/user/index">
+                <span>心理健康平台</span>
+            </a>
+        </div>
+        <div id="sidebar-scrollbar">
+            <nav class="iq-sidebar-menu">
+                <ul class="iq-menu">
+                    <li>
+                        <a href="/user/index" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</span></a>
+                    </li>
+                    <li>
+                        <a href="/user/queryDoctor" class="iq-waves-effect"><i
+                                class="ri-folder-5-fill"></i><span>心理服务预约</span></a>
+                    </li>
+                    <li>
+                        <a href="/user/healthTest" class="iq-waves-effect"><i
+                                class="ri-apps-fill"></i><span>心理健康测试</span></a>
+                    </li>
+                    <li>
+                        <a href="/user/historyRecord" class="iq-waves-effect"><i
+                                class="ri-order-play-fill"></i><span>心理测评历史</span></a>
+                    </li>
+                    <li>
+                        <a href="/user/personalCenter" class="iq-waves-effect"><i
+                                class="ri-user-2-fill"></i><span>个人中心</span></a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="p-3"></div>
+        </div>
+    </div>
+</div>
+<!--用户端-->
+<!--右侧顶部标题栏-->
+<div th:fragment="main-header-user">
+    <div class="iq-top-navbar">
+        <div class="iq-navbar-custom">
+
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <div class="iq-search-bar">
+                    <h3>用户端</h3>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                </div>
+                <ul class="navbar-list">
+                    <li>
+                        <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
+                            <div class="caption">
+                                <h6 class="mb-0 line-height"><span sec:authentication="principal.username"></span></h6>
+                                <span class="font-size-12">用户</span>
+                            </div>
+                        </a>
+                        <div class="iq-sub-dropdown iq-user-dropdown">
+                            <div class="iq-card shadow-none m-0">
+                                <div class="iq-card-body p-0 ">
+                                    <div class="bg-primary p-3">
+                                        <h5 class="mb-0 text-white line-height">你好-<span sec:authentication="principal.username"></span></h5>
+                                    </div>
+                                    <a href="/user/account" class="iq-sub-card iq-bg-primary-hover">
+                                        <div class="media align-items-center">
+                                            <div class="rounded iq-card-icon iq-bg-primary">
+                                                <i class="ri-file-user-line"></i>
+                                            </div>
+                                            <div class="media-body ml-3">
+                                                <h6 class="mb-0 ">修改账号</h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="d-inline-block w-100 text-center p-3">
+                                        <a class="bg-primary iq-sign-btn" href="/logout" role="button">退出登录<i
+                                                class="ri-login-box-line ml-2"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+</div>
+<!--用户端-->
+<!--右侧顶部标题栏-->
+<div th:fragment="footer-user">
+    <footer class="bg-white iq-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#"></a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 text-right">
+                    2022 @<a href="#">心理健康平台</a> 版权所有
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<!--医生端-->
+<!--左侧导航栏-->
+<div th:fragment="main-sidebar-doctor">
+    <div class="iq-sidebar">
+        <div class="iq-sidebar-logo d-flex justify-content-between">
+            <a href="/doctor/index">
+                <span>心理健康平台</span>
+            </a>
+        </div>
+        <div id="sidebar-scrollbar">
+            <nav class="iq-sidebar-menu">
+                <ul class="iq-menu">
+                    <li>
+                        <a href="/doctor/index" class="iq-waves-effect"><i class="ri-home-8-fill"></i><span>首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</span></a>
+                    </li>
+                    <li>
+                        <a href="/doctor/queryUser" class="iq-waves-effect"><i
+                                class="ri-folder-5-fill"></i><span>预约服务</span></a>
+                    </li>
+                    <li>
+                        <a href="/doctor/historyRecord" class="iq-waves-effect"><i
+                                class="ri-order-play-fill"></i><span>医疗历史</span></a>
+                    </li>
+                    <li>
+                        <a href="/doctor/healthTest" class="iq-waves-effect"><i
+                                class="ri-apps-fill"></i><span>心理健康量表</span></a>
+                    </li>
+                    <li>
+                        <a href="/doctor/personalCenter" class="iq-waves-effect"><i
+                                class="ri-user-2-fill"></i><span>个人中心</span></a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="p-3"></div>
+        </div>
+    </div>
+</div>
+<!--医生端-->
+<!--右侧顶部标题栏-->
+<div th:fragment="main-header-doctor">
+    <div class="iq-top-navbar">
+        <div class="iq-navbar-custom">
+
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <div class="iq-search-bar">
+                    <h3>医生端</h3>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                </div>
+                <ul class="navbar-list">
+                    <li>
+                        <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
+                            <div class="caption">
+                                <h6 class="mb-0 line-height"><span sec:authentication="principal.username"></span></h6>
+                                <span class="font-size-12">用户</span>
+                            </div>
+                        </a>
+                        <div class="iq-sub-dropdown iq-user-dropdown">
+                            <div class="iq-card shadow-none m-0">
+                                <div class="iq-card-body p-0 ">
+                                    <div class="bg-primary p-3">
+                                        <h5 class="mb-0 text-white line-height">你好-<span sec:authentication="principal.username"></span></h5>
+                                    </div>
+                                    <a href="/doctor/account" class="iq-sub-card iq-bg-primary-hover">
+                                        <div class="media align-items-center">
+                                            <div class="rounded iq-card-icon iq-bg-primary">
+                                                <i class="ri-file-user-line"></i>
+                                            </div>
+                                            <div class="media-body ml-3">
+                                                <h6 class="mb-0 ">修改账号</h6>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="d-inline-block w-100 text-center p-3">
+                                        <a class="bg-primary iq-sign-btn" href="/logout" role="button">退出登录<i
+                                                class="ri-login-box-line ml-2"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+</div>
+<!--医生端-->
+<!--右侧顶部标题栏-->
+<div th:fragment="footer-doctor">
+    <footer class="bg-white iq-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#"></a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 text-right">
+                    2022 @<a href="#">心理健康平台</a> 版权所有
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
+    <meta name="Author" content="Spruko Technologies Private Limited">
+    <meta name="Keywords"
+          content="bootstrap admin template, admin template ,admin panel template ,bootstrap 4 admin template ,bootstrap admin ,admin dashboard template ,bootstrap admin panel ,bitcoin dashboard ,crypto dashboard ,btc dashboard ,cryptocurrency dashboard ,bitcoin template ,cryptocurrency template ,crypto template ,cryptocurrency dashboard template ,cryptocurrency admin template ,crypto admin template ,btconline dashboard ,ryptocurrency dashboard template ,crypto admin template ,crypto trading dashboard ,cryptocurrency admin template "/>
+
+    <title>心理健康平台</title>
+    <link rel="stylesheet" href="/front/css/style.css">
+</head>
+<body>
+<div id="loading">
+    <div id="loading-center"></div>
+</div>
+<div class="wrapper">
+
+    <!--左侧导航栏-->
+    <div th:include="template :: main-sidebar-admin"></div>
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+
+        <div th:include="template :: main-header-admin"></div>
+
+        <div class="container-fluid">
+            <div class="iq-card">
+                <div class="iq-card-header d-flex justify-content-between">
+                    <div class="iq-header-title">
+                        <h4 class="card-title" th:text="${message}"></h4>
+                    </div>
+                </div>
+                <div class="iq-card-body">
+                    <div class="selbox d-flex" style="">
+                        <div class="form1">
+                            <ul class="row">
+                                <li class="col-xs-4"><span>量表：</span>
+                                    <input type="text" class="form-control" name="searchName" id="searchName"
+                                           th:value="${searchName}">
+                                </li>
+                                <li class="col-xs-4" style="padding-left: 10px">
+                                    <button class="btn btn-primary" th:onclick="searchByName()">查询</button>
+                                </li>
+                                <li class="col-xs-4" style="padding-left: 10px">
+                                    <button class="btn btn-primary" onclick="showMyModel()"> 添加量表</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tablebox">
+                        <table class="table">
+                            <thead>
+                            <tr style="padding: 5px">
+                                <th style="text-align:center">序号</th>
+                                <th style="text-align:center">量表名</th>
+                                <th style="text-align:center">量表描述</th>
+                                <th style="text-align:center">注意</th>
+                                <th style="text-align:center">计分规则</th>
+                                <th style="text-align:center">分数比例</th>
+                                <th style="text-align:center">满分</th>
+                                <th style="text-align:center">创建时间</th>
+                                <th style="text-align:center">修改时间</th>
+                                <th style="width:200px;text-align:center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="element,stat:${scaleList}">
+                                <td style="text-align:center" th:text="${stat.count}"></td>
+                                <td style="text-align:center" th:text="${element.name}"></td>
+                                <td style="text-align:center" th:text="${element.depict}"></td>
+                                <td style="text-align:center" th:text="${element.notice}"></td>
+                                <td style="text-align:center" th:text="${element.standard}"></td>
+                                <td style="text-align:center" th:text="${element.scoreProportion}"></td>
+                                <td style="text-align:center" th:text="${element.scoreFull}"></td>
+                                <td style="text-align:center" th:text="${#dates.format(element.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                                <td style="text-align:center" th:text="${#dates.format(element.updateTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                                </td>
+                                <td style="text-align:center">
+                                    <button class="btn btn-success btn-sm" th:onclick="manageQuestion([[${element.name}]])">题目管理</button>
+                                    <button class="btn btn-success btn-sm" th:onclick="showDialog(this,[[${element.id}]])">编辑</button>
+                                    <button class="btn-danger btn btn-sm"
+                                            th:onclick="deleteUser([[${searchName}]],[[${element.id}]],[[${element.name}]])">删除</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal"
+                 class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">编辑信息</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form">
+                                <input type="hidden" name="id" id="id">
+                                <div class="d-flex">
+                                    <label style="width: 80px">量表名</label>
+                                    <input type="text" id="name" name="name"
+                                           autocomplete="off" class="form-control placeholder-no-fix">
+                                </div>
+                                <br>
+                                <div class="d-flex">
+                                    <label style="width: 80px">量表描述</label>
+                                    <input type="text" id="depict" name="depict"
+                                           autocomplete="off" class="form-control placeholder-no-fix">
+                                </div>
+                                <br>
+                                <div class="d-flex">
+                                    <label style="width: 80px">注意</label>
+                                    <input type="text" id="notice" name="notice"
+                                           autocomplete="off" class="form-control placeholder-no-fix">
+                                </div>
+                                <br>
+                                <div class="d-flex">
+                                    <label style="width: 80px">计分规则</label>
+                                    <input type="text" id="standard" name="standard"
+                                           autocomplete="off" class="form-control placeholder-no-fix">
+                                </div>
+                                <br>
+                                <div class="d-flex">
+                                    <label style="width: 80px">分数比例</label>
+                                    <input type="text" id="scoreProportion" name="scoreProportion"
+                                           placeholder="题的得分相加为粗分,粗分乘以分数比例取整数,即得到标准分"
+                                           autocomplete="off" class="form-control placeholder-no-fix">
+                                </div>
+                                <br>
+                                <div class="d-flex">
+                                    <label style="width: 80px">满分</label>
+                                    <input type="number" id="scoreFull" name="scoreFull"
+                                           autocomplete="off" class="form-control placeholder-no-fix">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
+                            <button class="btn btn-primary" type="button" th:onclick="SubmitUserAccount()">提交</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal -->
+
+            <div th:include="template :: footer-admin"></div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    function searchByName() {
+        location.href = "/admin/queryScale?searchName="+$("#searchName").val()
+    }
+
+    function manageQuestion(scaleName) {
+        location.href = "/admin/queryQuestion?scaleName="+scaleName
+    }
+
+    function showMyModel() {
+        $("#myModal").modal('show')
+        deleteInfo()
+    }
+
+    function deleteUser(searchName,id,name) {
+        var gnl = confirm("确认删除信息{"+name+"}吗？")
+        if (gnl == true) {
+            $.ajax({
+                type: "Post",
+                url: "/admin/deleteScale",
+                data: {"id": id},
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == 200) {
+                        alert(data.message)
+                        if (searchName == null) {
+                            location.href = "/admin/queryScale"
+                        } else {
+                            location.href = "/admin/queryScale?searchName="+searchName
+                        }
+
+
+                    } else {
+                        alert(data.message)
+                    }
+                }
+            });
+            return true
+        }
+        return false
+    }
+
+    function showDialog(obj,i) {
+        $('#myModal').modal('show')
+        var tds = $(obj).parent().parent().find('td');
+
+        deleteInfo()
+
+        $("#id").val(i);
+        $("#name").val($(tds.eq(1)).text());
+        $("#depict").val($(tds.eq(2)).text());
+        $("#notice").val($(tds.eq(3)).text());
+        $("#standard").val($(tds.eq(4)).text());
+        $("#scoreProportion").val($(tds.eq(5)).text());
+        $("#scoreFull").val($(tds.eq(6)).text());
+    }
+
+    function deleteInfo(){
+        $("#id").val('');
+        $("#name").val('');
+        $("#depict").val('');
+        $("#notice").val('');
+        $("#standard").val('');
+        $("#scoreProportion").val('');
+        $("#scoreFull").val('');
+    }
+
+    function SubmitUserAccount() {
+        var formData = $("#form").serialize()
+        $.ajax({
+            type: "POST",
+            url: "/admin/insertScale",
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                if (data.code == 200) {
+                    $('#myModal').modal('hide')
+                    alert(data.message)
+                    location.href = "/admin/queryScale"
+                } else {
+                    alert(data.message)
+                }
+            }
+        });
+    }
+</script>
+
+<script src="/front/js/jquery.min.js" type="text/javascript"></script>
+<script src="/front/js/jquery.min.js"></script>
+<script src="/front/js/bootstrap.min.js"></script>
+<script src="/front/js/smooth-scrollbar.js"></script>
+<script src="/front/js/custom.js"></script>
+<script src="/front/laydate/laydate.js"></script>
+<script>
+    lay('#version').html('-v' + laydate.v);
+    laydate.render({
+        elem: '#date'
+        , range: true
+        , theme: '#2c9eae'
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
+    <meta name="Author" content="Spruko Technologies Private Limited">
+    <meta name="Keywords"
+          content="bootstrap admin template, admin template ,admin panel template ,bootstrap 4 admin template ,bootstrap admin ,admin dashboard template ,bootstrap admin panel ,bitcoin dashboard ,crypto dashboard ,btc dashboard ,cryptocurrency dashboard ,bitcoin template ,cryptocurrency template ,crypto template ,cryptocurrency dashboard template ,cryptocurrency admin template ,crypto admin template ,btconline dashboard ,ryptocurrency dashboard template ,crypto admin template ,crypto trading dashboard ,cryptocurrency admin template "/>
+
+    <title>心理健康平台</title>
+    <link rel="stylesheet" href="/front/css/style.css">
+</head>
+<body>
+<div id="loading">
+    <div id="loading-center"></div>
+</div>
+<div class="wrapper">
+
+    <!--左侧导航栏-->
+    <div th:include="template :: main-sidebar-doctor"></div>
+
+    <!-- Page Content  -->
+    <div id="content-page" class="content-page">
+
+        <div th:include="template :: main-header-doctor"></div>
+
+        <div class="container-fluid">
+            <div class="iq-card">
+                <div class="iq-card-header d-flex justify-content-between">
+                    <div class="iq-header-title">
+                        <h4 class="card-title">量表：[[${scaleName}]]，[[${message}]]</h4>
+                    </div>
+                </div>
+                <div class="iq-card-body">
+                    <div class="selbox d-flex" style="">
+                        <div class="form1">
+                            <ul class="row">
+                                <li class="col-xs-4"><span>题目：</span>
+                                    <input type="text" class="form-control" name="searchName" id="searchName"
+                                           th:value="${searchName}">
+                                </li>
+                                <li class="col-xs-4" style="padding-left: 10px">
+                                    <button class="btn btn-primary" th:onclick="searchByName([[${scaleName}]])">查询</button>
+                                </li>
+                                <li class="col-xs-4" style="padding-left: 10px">
+                                    <button class="btn btn-default" onclick="goBack()"> 返回</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tablebox">
+                        <table class="table">
+                            <thead>
+                            <tr style="padding: 5px">
+                                <th style="text-align:center">序号</th>
+                                <th style="text-align:center">题目描述</th>
+                                <th style="text-align:center">选项A</th>
+                                <th style="text-align:center">选项B</th>
+                                <th style="text-align:center">选项C</th>
+                                <th style="text-align:center">选项D</th>
+                                <th style="text-align:center">选项A分值</th>
+                                <th style="text-align:center">选项B分值</th>
+                                <th style="text-align:center">选项C分值</th>
+                                <th style="text-align:center">选项D分值</th>
+                                <th style="text-align:center">创建时间</th>
+                                <th style="text-align:center">修改时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="element,stat:${list}">
+                                <td style="text-align:center" th:text="${stat.count}"></td>
+                                <td style="text-align:center" th:text="${element.theme}"></td>
+                                <td style="text-align:center" th:text="${element.optionA}"></td>
+                                <td style="text-align:center" th:text="${element.optionB}"></td>
+                                <td style="text-align:center" th:text="${element.optionC}"></td>
+                                <td style="text-align:center" th:text="${element.optionD}"></td>
+                                <td style="text-align:center" th:text="${element.valueA}"></td>
+                                <td style="text-align:center" th:text="${element.valueB}"></td>
+                                <td style="text-align:center" th:text="${element.valueC}"></td>
+                                <td style="text-align:center" th:text="${element.valueD}"></td>
+                                <td style="text-align:center" th:text="${#dates.format(element.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                                <td style="text-align:center" th:text="${#dates.format(element.updateTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div th:include="template :: footer-doctor"></div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    function searchByName(scaleName) {
+        location.href = "/doctor/queryQuestion?searchName="+$("#searchName").val()+"&scaleName="+scaleName
+    }
+
+    function goBack() {
+        location.href = "/doctor/queryScale"
+    }
+</script>
+
+<script src="/front/js/jquery.min.js" type="text/javascript"></script>
+<script src="/front/js/jquery.min.js"></script>
+<script src="/front/js/bootstrap.min.js"></script>
+<script src="/front/js/smooth-scrollbar.js"></script>
+<script src="/front/js/custom.js"></script>
+<script src="/front/laydate/laydate.js"></script>
+<script>
+    lay('#version').html('-v' + laydate.v);
+    laydate.render({
+        elem: '#date'
+        , range: true
+        , theme: '#2c9eae'
+    });
+</script>
+</body>
+</html>
