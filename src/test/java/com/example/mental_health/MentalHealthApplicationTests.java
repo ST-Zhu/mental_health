@@ -20,7 +20,7 @@ class MentalHealthApplicationTests {
     PasswordEncoder passwordEncoder;
 
     @Test
-    void contextLoads() {
+    void addAdmin() {
         User user = new User();
         user.setUsername("admin");
         user.setPassword(passwordEncoder.encode("123456"));
@@ -33,7 +33,7 @@ class MentalHealthApplicationTests {
     }
 
     @Test
-    void contextLoads2() {
+    void addDoctor() {
         User user = new User();
         user.setUsername("doctor2");
         user.setPassword(passwordEncoder.encode("123456"));
